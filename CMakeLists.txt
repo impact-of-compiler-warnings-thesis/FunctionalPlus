@@ -48,3 +48,6 @@ endif()
 # ---- Install ----
 
 include(cmake/install-rules.cmake)
+
+add_subdirectory(examples)
+add_subdirectory(test)
