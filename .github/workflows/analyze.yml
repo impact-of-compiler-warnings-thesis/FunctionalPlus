@@ -20,8 +20,17 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install ninja-build \
-                           doctest-dev
+          sudo apt install ninja-build
+      - name: Install Doctest
+        run: |
+          git clone --depth=1 --branch=v2.4.9 https://github.com/doctest/doctest
+          cd doctest
+          mkdir build && cd build
+          cmake .. -GNinja \
+                   -DDOCTEST_WITH_TESTS=OFF \
+                   -DDOCTEST_WITH_MAIN_IN_STATIC_LIB=OFF
+          ninja
+          sudo ninja install
       - name: Generate build files
         run: |
           mkdir build && cd build
