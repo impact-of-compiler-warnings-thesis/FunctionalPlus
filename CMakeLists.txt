@@ -49,5 +49,5 @@ endif()
 
 include(cmake/install-rules.cmake)
 
-add_subdirectory(examples)
-add_subdirectory(test)
+# add_subdirectory(examples)
+# add_subdirectory(test)

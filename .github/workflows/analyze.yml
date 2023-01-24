@@ -23,10 +23,14 @@ jobs:
           sudo apt install ninja-build doctest-dev
       - name: Generate build files
         run: |
-          cmake -G Ninja -S test -B build -D CMAKE_BUILD_TYPE=Debug
+          mkdir build && cd build
+          cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug
+
+          mkdir test && cd test
+          cmake ../../test -GNinja -DCMAKE_BUILD_TYPE=Debug
       - name: Run build-wrapper
         run: |
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build
+          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build/test
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
